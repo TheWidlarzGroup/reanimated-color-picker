@@ -20,7 +20,7 @@ type BubbleProps = {
 export const BubbleContainer = () => {
   const styles = useStyles();
   const {goBack} = useNavigation();
-  const [dropColor, setDropColor] = useState(theme.colors.disabledText);
+  const [dropColor, setDropColor] = useState('grey');
   const {width, height} = useWindowDimensions();
 
   const initBubbles = COLORS.map(color => ({
@@ -42,7 +42,7 @@ export const BubbleContainer = () => {
       </TouchableOpacity>
       <Box marginTop="xxxl" alignItems="center">
         <Text marginHorizontal="xxl" color="white" textAlign="center">
-          Pick your favourite color and drop it in the grey area below
+          Pick your favourite color and drop it in the light grey area below
         </Text>
       </Box>
       <View
@@ -52,10 +52,7 @@ export const BubbleContainer = () => {
             backgroundColor: dropColor,
             top: height - 175,
             left: width / 2 - 500,
-            zIndex: dropColor === theme.colors.disabledText ? 0 : 3,
-            height: 1000,
-            width: 1000,
-            borderRadius: 1000 / 2,
+            zIndex: dropColor === 'grey' ? 0 : 3,
           },
         ]}
       />
@@ -83,8 +80,5 @@ const useStyles = mkUseStyles(() => ({
     position: 'absolute',
     width: 1000,
     borderRadius: 500,
-  },
-  scaleCheckmark: {
-    transform: [{scale: 2}],
   },
 }));

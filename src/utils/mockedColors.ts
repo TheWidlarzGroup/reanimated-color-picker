@@ -2,77 +2,81 @@ type ColorProps = {
   id: number;
   color: string;
 };
+
+const randomColor = () =>
+  '#' + Math.floor(Math.random() * 16777215).toString(16);
+
 export const COLORS: ColorProps[] = [
   {
-    color: 'red',
+    color: randomColor(),
     id: 1,
   },
   {
-    color: 'blue',
+    color: randomColor(),
     id: 2,
   },
   {
-    color: 'pink',
+    color: randomColor(),
     id: 3,
   },
   {
-    color: 'orange',
+    color: randomColor(),
     id: 4,
   },
   {
-    color: 'grey',
+    color: randomColor(),
     id: 5,
   },
   {
-    color: 'green',
+    color: randomColor(),
     id: 6,
   },
   {
-    color: 'red',
+    color: randomColor(),
     id: 7,
   },
   {
-    color: 'blue',
+    color: randomColor(),
     id: 8,
   },
   {
-    color: 'pink',
+    color: randomColor(),
     id: 9,
   },
   {
-    color: 'orange',
+    color: randomColor(),
     id: 10,
   },
   {
-    color: 'grey',
+    color: randomColor(),
     id: 11,
   },
   {
-    color: 'green',
+    color: randomColor(),
     id: 12,
   },
   {
-    color: 'red',
+    color: randomColor(),
     id: 13,
   },
   {
-    color: 'blue',
+    color: randomColor(),
     id: 14,
   },
   {
-    color: 'pink',
+    color: randomColor(),
     id: 15,
   },
   {
-    color: 'orange',
+    color: randomColor(),
     id: 16,
   },
   {
-    color: 'grey',
+    color: randomColor(),
     id: 17,
   },
   {
-    color: 'green',
+    color: randomColor(),
     id: 18,
   },
 ];

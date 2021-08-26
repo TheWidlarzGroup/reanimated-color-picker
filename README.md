@@ -1,18 +1,38 @@
 # React Native Reanimated 2 - color picker animation
 
-# Introduction
+### Introduction
 
+This repository is a playground for an article "React Native Reanimated 2 - color picker animation".
 
-# Instructions
+### Branches
 
-## Branches
+- master - complete app
+- starter - starter app
 
-1. You can find complete code on master branch.
+### Instructions
 
-2. You can find starter code on starter branch.
+Clone the repository:
 
-## Start application
+```bash
+git clone ---LINK---
+```
 
-Just clone the repository, install dependencies, and you're ready to go.
+Install packages:
 
-# Result
+```bash
+cd reanimatedColorPicker && yarn install
+```
+
+For iOS also:
+
+```bash
+cd ios && pod install
+```
+
+Run the project:
+
+```bash
+yarn ios
+// or
+yarn android
+```
