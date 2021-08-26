@@ -26,9 +26,9 @@ type BubbleProps = {
 export const BubbleContainer = () => {
   const styles = useStyles();
   const {goBack} = useNavigation();
-  const [dropColor, setDropColor] = useState(theme.colors.disabledText);
+  const [dropColor, setDropColor] = useState('grey');
   const {width, height} = useWindowDimensions();
-  const dropTop = useSharedValue(height - 175);
+  const dropAreaTop = useSharedValue(height - 175);
   const dropHeight = useSharedValue(1000);
 
   const initBubbles = COLORS.map(color => ({
@@ -41,12 +41,12 @@ export const BubbleContainer = () => {
   const [bubbles] = useState<BubbleProps[]>(initBubbles);
 
   const animateDropArea = () => {
-    dropTop.value = withTiming(-50, {duration: 600});
+    dropAreaTop.value = withTiming(-50, {duration: 600});
     dropHeight.value = withTiming(1.5 * height, {duration: 600});
   };
 
   const animatedDrop = useAnimatedStyle(() => ({
-    top: dropTop.value,
+    top: dropAreaTop.value,
     height: dropHeight.value,
   }));
 
@@ -59,8 +59,8 @@ export const BubbleContainer = () => {
         <IconBack />
       </TouchableOpacity>
       <Box marginTop="xxxl" alignItems="center">
-        <Text marginHorizontal="xxl">
-          Pick your favourite color and drop it in the grey area below
+        <Text marginHorizontal="xxl" color="white" textAlign="center">
+          Pick your favourite color and drop it in the light grey area below
         </Text>
       </Box>
       <Animated.View
@@ -70,7 +70,7 @@ export const BubbleContainer = () => {
           {
             backgroundColor: dropColor,
             left: width / 2 - 500,
-            zIndex: dropColor === theme.colors.disabledText ? 0 : 3,
+            zIndex: dropColor === 'grey' ? 0 : 3,
           },
         ]}
       />
@@ -79,7 +79,7 @@ export const BubbleContainer = () => {
           <Bubble
             {...bubble}
             diameter={56}
-            dropArea={dropTop.value}
+            dropAreaTop={dropAreaTop.value}
             setDropColor={setDropColor}
             animateDropArea={animateDropArea}
           />
@@ -104,8 +104,5 @@ const useStyles = mkUseStyles(() => ({
     position: 'absolute',
     width: 1000,
     borderRadius: 500,
-  },
-  scaleCheckmark: {
-    transform: [{scale: 2}],
   },
 }));

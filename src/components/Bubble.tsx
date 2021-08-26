@@ -25,7 +25,7 @@ type BubbleProps = {
   color: string;
   diameter: number;
   position: Position;
-  dropArea: number;
+  dropAreaTop: number;
   setDropColor: (arg0: string) => void;
   animateDropArea: () => void;
 };
@@ -34,7 +34,7 @@ export const Bubble = ({
   color,
   diameter,
   position,
-  dropArea,
+  dropAreaTop,
   setDropColor,
   animateDropArea,
 }: BubbleProps) => {
@@ -57,7 +57,7 @@ export const Bubble = ({
     setDropColor(color);
     bubbleOpacity.value = 0;
     animateDropArea();
-    setTimeout(() => navigation.goBack(), 800);
+    setTimeout(() => navigation.goBack(), 2800);
   };
 
   const gestureHandler = useAnimatedGestureHandler<
@@ -74,7 +74,7 @@ export const Bubble = ({
     onActive: (event, ctx) => {
       translateX.value = ctx.offsetX + event.translationX;
       translateY.value = ctx.offsetY + event.translationY;
-      if (translateY.value > dropArea) {
+      if (translateY.value > dropAreaTop) {
         draggedBubbleScale.value = withTiming(1.2, {duration: 200});
       } else {
         draggedBubbleScale.value = withTiming(1, {duration: 200});
@@ -89,7 +89,7 @@ export const Bubble = ({
         velocity: velocityY,
         clamp: [130, height - diameter],
       });
-      if (translateY.value > dropArea && draggedBubbleScale.value > 1) {
+      if (translateY.value > dropAreaTop && draggedBubbleScale.value > 1) {
         runOnJS(handleSelection)();
       }
     },
