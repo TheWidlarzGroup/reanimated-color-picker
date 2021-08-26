@@ -14,7 +14,7 @@ This repository is a playground for an article "React Native Reanimated 2 - colo
 Clone the repository:
 
 ```bash
-git clone ---LINK---
+git clone https://github.com/TheWidlarzGroup/reanimated-color-picker.git
 ```
 
 Install packages:
