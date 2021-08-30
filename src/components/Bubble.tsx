@@ -15,6 +15,7 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 import {useUserContext} from '../context/UserContext';
+import {CONSTANTS as C} from '../utils/helpers';
 
 type Position = {
   x: number;
@@ -26,8 +27,7 @@ type BubbleProps = {
   diameter: number;
   position: Position;
   dropAreaTop: number;
-  setDropColor: (arg0: string) => void;
-  animateDropArea: () => void;
+  animateDropArea: (arg0: string) => void;
 };
 
 export const Bubble = ({
@@ -35,17 +35,14 @@ export const Bubble = ({
   diameter,
   position,
   dropAreaTop,
-  setDropColor,
   animateDropArea,
 }: BubbleProps) => {
   const navigation = useNavigation();
   const {height, width} = useWindowDimensions();
   const {setUserColor} = useUserContext();
 
-  const initialX = position.x;
-  const initialY = position.y;
-  const translateX = useSharedValue(initialX);
-  const translateY = useSharedValue(initialY);
+  const translateX = useSharedValue(position.x);
+  const translateY = useSharedValue(position.y);
   const bubbleSize = useSharedValue(0);
   const draggedBubbleScale = useSharedValue(1);
   const bubbleOpacity = useSharedValue(1);
@@ -54,10 +51,9 @@ export const Bubble = ({
 
   const handleSelection = () => {
     setUserColor(color);
-    setDropColor(color);
     bubbleOpacity.value = 0;
-    animateDropArea();
-    setTimeout(() => navigation.goBack(), 2800);
+    animateDropArea(color);
+    setTimeout(() => navigation.goBack(), 1000);
   };
 
   const gestureHandler = useAnimatedGestureHandler<
@@ -83,11 +79,11 @@ export const Bubble = ({
     onEnd: ({velocityX, velocityY}) => {
       translateX.value = withDecay({
         velocity: velocityX,
-        clamp: [0, width - diameter],
+        clamp: [C.BUBBLES_OFFSET_LEFT, width - diameter],
       });
       translateY.value = withDecay({
         velocity: velocityY,
-        clamp: [130, height - diameter],
+        clamp: [C.BUBBLES_OFFSET_TOP, height - diameter],
       });
       if (translateY.value > dropAreaTop && draggedBubbleScale.value > 1) {
         runOnJS(handleSelection)();
