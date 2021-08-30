@@ -39,9 +39,9 @@ export const BubbleContainer = () => {
   const initBubbles = COLORS.map(color => ({
     ...color,
     position: {
-      x: randomFromRange(C.BUBBLE_SIZE, width - C.BUBBLE_SIZE),
+      x: randomFromRange(C.BUBBLES_OFFSET_LEFT, width - C.BUBBLE_SIZE),
       y: randomFromRange(
-        C.BUBBLES_OFFSET_LEFT,
+        C.BUBBLES_OFFSET_TOP,
         height - C.BUBBLES_OFFSET_BOTTOM,
       ),
     },
