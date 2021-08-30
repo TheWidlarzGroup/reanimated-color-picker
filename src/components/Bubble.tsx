@@ -2,6 +2,7 @@ import React from 'react';
 import {useWindowDimensions, View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {useUserContext} from '../context/UserContext';
+import {CONSTANTS as C} from '../utils/helpers';
 
 type Position = {
   x: number;

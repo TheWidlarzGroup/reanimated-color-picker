@@ -1,10 +1,16 @@
 import React, {useState} from 'react';
-import {TouchableOpacity, useWindowDimensions, View} from 'react-native';
+import {
+  TouchableOpacity,
+  useWindowDimensions,
+  View,
+  Text,
+  StyleSheet,
+} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import {Box, Text, mkUseStyles, theme} from '../utils/theme';
 import IconBack from '../assets/icon-back-white.svg';
 import {Bubble} from './Bubble';
 import {COLORS} from '../utils/mockedColors';
+import {CONSTANTS as C} from '../utils/helpers';
 
 export type Position = {
   x: number;
@@ -18,7 +24,6 @@ type BubbleProps = {
 };
 
 export const BubbleContainer = () => {
-  const styles = useStyles();
   const {goBack} = useNavigation();
   const [dropColor, setDropColor] = useState('grey');
   const {width, height} = useWindowDimensions();
@@ -40,36 +45,45 @@ export const BubbleContainer = () => {
         activeOpacity={0.2}>
         <IconBack />
       </TouchableOpacity>
-      <Box marginTop="xxxl" alignItems="center">
-        <Text marginHorizontal="xxl" color="white" textAlign="center">
+      <View style={styles.titleContainer}>
+        <Text style={styles.title}>
           Pick your favourite color and drop it in the light grey area below
         </Text>
-      </Box>
+      </View>
       <View
         style={[
           styles.dropArea,
           {
-            backgroundColor: dropColor,
-            top: height - 175,
-            left: width / 2 - 500,
+            backgroundColor: 'grey',
+            top: height - C.DROP_AREA_OFFSET,
+            left: width / 2 - C.DROP_AREA_INIT_SIZE / 2,
             zIndex: dropColor === 'grey' ? 0 : 3,
           },
         ]}
       />
       {bubbles.map(bubble => (
-        <Box position="absolute" key={bubble.id}>
-          <Bubble {...bubble} diameter={56} />
-        </Box>
+        <View style={{position: 'absolute'}} key={bubble.id}>
+          <Bubble {...bubble} diameter={C.BUBBLE_SIZE} />
+        </View>
       ))}
     </View>
   );
 };
-const useStyles = mkUseStyles(() => ({
+const styles = StyleSheet.create({
+  titleContainer: {
+    marginTop: 75,
+    alignItems: 'center',
+  },
+  title: {
+    marginHorizontal: 50,
+    color: 'white',
+    textAlign: 'center',
+  },
   backBtn: {
     position: 'absolute',
     left: 0,
     top: 65,
-    zIndex: theme.zIndices['2'],
+    zIndex: 2,
   },
   mainContainer: {
     flex: 1,
@@ -78,7 +92,8 @@ const useStyles = mkUseStyles(() => ({
   },
   dropArea: {
     position: 'absolute',
-    width: 1000,
-    borderRadius: 500,
+    width: C.DROP_AREA_INIT_SIZE,
+    height: C.DROP_AREA_INIT_SIZE,
+    borderRadius: C.DROP_AREA_INIT_SIZE / 2,
   },
-}));
+});
