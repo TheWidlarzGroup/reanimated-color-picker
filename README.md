@@ -2,7 +2,7 @@
 
 ### Introduction
 
-This repository is a playground for an article "React Native Reanimated 2 - color picker animation".
+This repository is a playground for an article "Custom color picker animation with React Native Reanimated v2". [Read here](https://thewidlarzgroup.com/reanimated2-color-picker/)
 
 ### Branches
 
